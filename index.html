@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>How Medic Cut will affect DC</title>
+        <link rel="stylesheet" href="style.css"/>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap" rel="stylesheet">
+    </head>
+
+    <body> 
+        <header>
+            <h1>More than 91,000 D.C. residents at High Risk of Losing Medicaid</h1>
+        </header>
+
+        <main>
+            <section class="intro">
+                By Sinyi Au
+            </section>
+
+                <p>More than 91,000 low-income residents in the nation's capital are at high risk of losing their health insurance under the sweeping tax and spending Republic bill that imposes the most significant changes to the Medicaid program in a generation. 
+                </p>
+
+                <p>The at-risk group – primarily working adults covered by the Affordable Care Act expansion – represents one-third of the 272,249 people in the District of Columbia who relied on the public insurance program as of June 2025, according to a data analysis of the legislation and enrollment figures from the D.C. Department of Health Care Finance.
+                </p>
+
+            </section>
+            <section class="chart">
+                <div id="treemap"></div>
+                <div class="flourish-embed" data-src="visualisation/24606024"><script src="https://public.flourish.studio/resources/embed.js"></script><noscript><img src="https://public.flourish.studio/visualisation/24606024/thumbnail" width="100%" alt="hierarchy visualization" /></noscript></div>
+            </section>
+
+            <p>The bill fundamentally re-engineers the health safety net by mandating strict work requirements and slashing the federal funding mechanisms that D.C. and other state depend on. The result is a looming health crisis that will disproportionately affect the city’s most vulnerable. 
+            </p>
+
+            <p>“These cuts are the inevitable result of federal decisions in this legislation, which is shifting costs to states and in turn forcing them to make really painful, harsh cuts that will take away coverage and health services from low income individuals and families,” says Edwin Park, a Research Professor at Georgetown University's McCourt School of Public Policy.
+            </p>
+
+        <h2>A Wall of Paperwork</h2>
+
+            <p>The primary mechanism that puts over 91,000 lives in jeopardy is a new “community engagement” mandate. Starting in 2027, most adults covered under the ACA expansion must document 80 hours per month of work, training or community service to stay insured.
+            </p>
+
+        <section class="chart">
+            <div id="interactive.form"></div>
+            <div class="screener-container">
+        
+                <div id="step-1" class="step active">
+                    <h2>Which of these D.C. Medicaid groups best describes you?</h2>
+                    <p>Choose the one that is the main reason you have Medicaid.</p>
+                    <ul class="options-list">
+                        <li><button class="option-button" onclick="showStep('step-2')">Childless Adult</button></li>
+                        <li><button class="option-button" onclick="showStep('step-2')">Parent / Caretaker</button></li>
+                        <li><button class="option-button" onclick="showStep('result-unlikely')">Child under 19</button></li>
+                        <li><button class="option-button" onclick="showStep('result-unlikely')">Aged (65+), blind or disabled</button></li>
+                        <li><button class="option-button" onclick="showStep('result-unlikely')">Receiving Long-Term Care or services through a Disability Waiver</button></li>
+                        <li><button class="option-button" onclick="showStep('result-unlikely')">Enrolled in a Medicare Savings Program (like QMB)</button></li>
+                    </ul>
+                </div>
+        
+                <div id="step-2" class="step">
+                    <h2>The new rules have several exemptions. Do any of the following situations apply to you?</h2>
+                    <ul class="options-list">
+                        <li><button class="option-button" onclick="showStep('result-low-risk')">I am pregnant or have given birth in the past 12 months.</button></li>
+                        <li><button class="option-button" onclick="showStep('result-low-risk')">I am the main caretaker for a child under age 13.</button></li>
+                        <li><button class="option-button" onclick="showStep('result-low-risk')">I am the main caretaker for a disabled person.</button></li>
+                        <li><button class="option-button" onclick="showStep('result-low-risk')">I am medically frail, certified by a doctor as unable to work, or have a serious/complex medical condition.</button></li>
+                        <li><button class="option-button" onclick="showStep('result-low-risk')">I am participating in a drug or alcohol addiction treatment program.</button></li>
+                        <li><button class="option-button" onclick="showStep('result-low-risk')">I already meet the work requirements for SNAP (food stamps) or TANF.</button></li>
+                        <li><button class="option-button" onclick="showStep('result-high-risk')">None of the above apply to me.</button></li>
+                    </ul>
+                </div>
+        
+                <div id="result-unlikely" class="step">
+                    <div class="result-box result-unlikely">
+                        <h3>Unlikely to be Affected</h3>
+                        <p>Based on the new law, your Medicaid coverage is <strong>unlikely</strong> to be affected. The new community engagement (work) requirements generally do not apply to individuals who are eligible for Medicaid due to age (under 19 or 65+), blindness or a disability.</p>
+                    </div>
+                    <button class="restart-button" onclick="showStep('step-1')">Start Over</button>
+                </div>
+                
+                <div id="result-low-risk" class="step">
+                    <div class="result-box result-low-risk">
+                        <h3>Low Risk, but action May Be Needed</h3>
+                        <p>Based on your answer, you <strong>likely qualify for an exemption</strong> from the new community engagement requirements. However, you may need to provide documentation to the D.C. government to verify your exemption status.</p>
+                    </div>
+                    <button class="restart-button" onclick="showStep('step-1')">Start Over</button>
+                </div>
+        
+                <div id="result-high-risk" class="step">
+                    <div class="result-box result-high-risk">
+                        <h3>High Risk</h3>
+                        <p>Based on your answers, your Medicaid coverage is at <strong>HIGH RISK</strong> of being affected by the new bill.</p>
+                        <ul>
+                            <li><strong>What you must do:</strong> To keep your coverage, you will be required to perform and report at least <strong>80 hours per month</strong> of "community engagement," such as work, community service, job training or education.</li>
+                            <li><strong>You must report your hours:</strong> You will have to report these hours to the D.C. government.</li>
+                            ]<li><strong>Reporting is complex:</strong> The law requires you to prove you met the 80-hour rule for at least one month <em>before</em> you can enroll, and then verify it again at least every six months.</li>
+                            <li><strong>No other insurance help:</strong> If you lose Medicaid for not meeting these requirements, the law also makes you <strong>ineligible for financial help</strong> (premium tax credits) to buy other health insurance on the ACA Marketplace.</li>
+                        </ul>
+                    </div>
+                    <button class="restart-button" onclick="showStep('step-1')">Start Over</button>
+                </div>
+        
+            </div>
+        </section>
+
+            <p>For those who lose coverage, there is no safety net. A KFF analysis highlights a provision that creates a “coverage lock-out,” explicitly barring anyone disenrolled due to the work requirements from receiving subsidized health insurance on the ACA Marketplace. They will be pushed directly into the ranks of the uninsured.
+            </p>
+
+        <h2>Squeezing the system from both ends</h2>
+            <p>While residents face new barriers to care, the District’s entire healthcare system is being squeezed financially. The law simultaneously reduces funding for the city and increases the strain on its limited resources.
+            </p>
+
+            <p>“When Medicaid is cut, fewer people are enrolled and more uninsured, that puts pressures on the District’s relatively limited healthcare system,” Park says, noting that the city has just “a handful of hospitals” to absorb the impact of a newly uninsured population seeking more expensive emergency care.
+            </p>
+
+            <p>This pressure is applied to a system already in a financially precarious position, unique to the District. 
+            </p>
+
+            <p>“Congress has restricted the ability of the District to spend money that it has already raised through taxes,” Park says. “The District is already facing a shortfall, even though it has the funding to make that spending.”
+            </p>
+
+            <p>The new law intensifies this crisis by systematically dismantling the financial architecture of the D.C. Medicaid program. It phases down the city’s ability to use provider taxes, a key tool for drawing down federal matching funds. 
+            </p>
+
+            <p>It also caps supplemental payments to the safety-net hospitals that serve the highest volumes of Medicaid patients and eliminates the enhanced federal match for providing emergency care to certain immigrants.
+            </p>
+
+            <p>Pending implementation timeline.</p>
+        </main>
+
+        <script>
+            // JavaScript to control which step is visible
+            function showStep(stepId) {
+                // First, hide all the step divs
+                document.querySelectorAll('.step').forEach(function(step) {
+                    step.classList.remove('active');
+                });
+                // Then, show the one with the correct ID
+                document.getElementById(stepId).classList.add('active');
+            }
+        </script>
+    </body>
+</html>
+

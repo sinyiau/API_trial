@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Analysis: H.R. 1 Medicaid Changes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f7f5; /* Warm neutral background */
+        }
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e7e5e4; /* stone-200 */
+            transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+        .card:hover {
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.07), 0 4px 6px -4px rgb(0 0 0 / 0.07);
+            transform: translateY(-2px);
+        }
+        .details-content {
+            display: none;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
+        }
+        .details-content.show {
+            display: block;
+            max-height: 1000px; /* Large enough to fit content */
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        .nav-link {
+            transition: color 0.2s;
+        }
+        .nav-link:hover {
+            color: #0d9488; /* teal-600 */
+        }
+        .accent-color {
+            color: #14532d; /* green-900 */
+        }
+        .accent-bg {
+            background-color: #dcfce7; /* green-100 */
+        }
+        .btn-toggle {
+            transition: background-color 0.2s, color 0.2s;
+        }
+        .btn-toggle .arrow {
+            transition: transform 0.3s ease-in-out;
+        }
+        .btn-toggle.open .arrow {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body class="text-stone-800">
+
+    <!-- 
+    Chosen Palette: Warm Neutral Harmony (Stone background, white cards, teal/green accents)
+    Application Structure Plan: The application is structured as a single-page vertical report. A sticky navigation bar provides an overview and allows users to jump to specific policy sections. Each policy change is presented in a distinct "card." This card-based layout breaks down complex information into manageable chunks. The primary interaction is a "drill-down" feature: users see a high-level summary (the policy and who it affects) and can click a button to reveal a detailed explanation. This progressive disclosure approach prevents information overload and allows users to explore at their own pace. The structure was chosen to transform a static data table into an engaging, user-guided narrative.
+    Visualization & Content Choices: Given the source material is textual analysis, traditional charts (like bar or pie) are not suitable. Instead, the "visualization" is achieved through information architecture. Structured HTML cards with clear typography, icons (Unicode), and color-coding serve as the primary method of presenting information. The core interaction is the expandable "details" section for each policy, which replaces a static table column with a dynamic content block. This choice prioritizes clarity and readability for dense textual information over inappropriate data charts. The final "Narrative Advice" section is presented as a distinct summary block to provide key takeaways. This supports the goal of user understanding and synthesis.
+    CONFIRMATION: NO SVG graphics used. NO Mermaid JS used.
+    -->
+
+    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-10 border-b border-stone-200">
+        <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <span class="font-bold text-xl accent-color">H.R. 1 Medicaid Analysis</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#beneficiary-impacts" class="nav-link text-stone-600 font-medium px-3 py-2 rounded-md text-sm">Beneficiary Impacts</a>
+                        <a href="#program-impacts" class="nav-link text-stone-600 font-medium px-3 py-2 rounded-md text-sm">Program Impacts</a>
+                        <a href="#narrative-advice" class="nav-link text-stone-600 font-medium px-3 py-2 rounded-md text-sm">Key Takeaways</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="max-w-6xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-extrabold tracking-tight text-stone-900 sm:text-5xl">Decoding H.R. 1: Key Medicaid Changes and Their Targets</h1>
+            <p class="mt-4 max-w-2xl mx-auto text-lg text-stone-600">An interactive breakdown of the major policy shifts affecting Medicaid beneficiaries and program structures.</p>
+        </div>
+
+        <!-- Beneficiary Impacts Section -->
+        <section id="beneficiary-impacts" class="mb-16">
+            <h2 class="text-3xl font-bold border-b-2 border-teal-600 pb-2 mb-8">Impacts on Beneficiaries</h2>
+            <div class="space-y-6">
+                
+                <!-- Card 1: Work Requirement -->
+                <div class="card rounded-lg shadow-sm p-6">
+                    <h3 class="text-xl font-bold text-stone-900">Community Engagement / Work Requirement</h3>
+                    <div class="mt-4 accent-bg border-l-4 border-green-700 p-4 rounded-r-lg">
+                        <p class="font-semibold text-green-900">Primary Affected Group:</p>
+                        <p class="text-green-800"><span class="text-2xl mr-2">👥</span>All adults covered by the ACA Medicaid expansion (including childless adults and parents of children over 13).</p>
+                    </div>
+                    <div class="mt-4">
+                        <button class="btn-toggle w-full text-left font-semibold text-teal-700 hover:text-teal-900 p-2 rounded-md hover:bg-teal-50 flex justify-between items-center" data-target="details-1">
+                            <span>View Details & Refinement</span>
+                            <span class="arrow text-2xl">&#x25BC;</span>
+                        </button>
+                        <div id="details-1" class="details-content px-2 text-stone-700 border-t mt-2">
+                            <p class="font-semibold mt-4">Finding: Mostly correct, but the scope is broader.</p>
+                            <p class="mt-2">Per Section 71119 of the bill, this applies to all adults made eligible for Medicaid through the ACA expansion (`Sec. 1902(a)(10)(A)(i)(VIII)`). This includes parents of children over 13, not just childless adults.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Cost-Sharing -->
+                <div class="card rounded-lg shadow-sm p-6">
+                    <h3 class="text-xl font-bold text-stone-900">New Cost-Sharing</h3>
+                     <div class="mt-4 accent-bg border-l-4 border-green-700 p-4 rounded-r-lg">
+                        <p class="font-semibold text-green-900">Primary Affected Group:</p>
+                        <p class="text-green-800"><span class="text-2xl mr-2">💰</span>All ACA Medicaid expansion adults with incomes above 100% of the Federal Poverty Level (FPL).</p>
+                    </div>
+                    <div class="mt-4">
+                         <button class="btn-toggle w-full text-left font-semibold text-teal-700 hover:text-teal-900 p-2 rounded-md hover:bg-teal-50 flex justify-between items-center" data-target="details-2">
+                            <span>View Details & Refinement</span>
+                            <span class="arrow text-2xl">&#x25BC;</span>
+                        </button>
+                        <div id="details-2" class="details-content px-2 text-stone-700 border-t mt-2">
+                             <p class="font-semibold mt-4">Finding: Mostly correct, but the scope is broader.</p>
+                             <p class="mt-2">Per Section 71120, this applies to all ACA expansion beneficiaries (`specified individual`) with family incomes over 100% of the FPL. This includes parents, not only childless adults.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Redeterminations -->
+                <div class="card rounded-lg shadow-sm p-6">
+                    <h3 class="text-xl font-bold text-stone-900">6-Month Redeterminations</h3>
+                     <div class="mt-4 accent-bg border-l-4 border-green-700 p-4 rounded-r-lg">
+                        <p class="font-semibold text-green-900">Primary Affected Group:</p>
+                        <p class="text-green-800"><span class="text-2xl mr-2">📅</span>All adults covered by the ACA Medicaid expansion.</p>
+                    </div>
+                    <div class="mt-4">
+                         <button class="btn-toggle w-full text-left font-semibold text-teal-700 hover:text-teal-900 p-2 rounded-md hover:bg-teal-50 flex justify-between items-center" data-target="details-3">
+                            <span>View Details & Refinement</span>
+                            <span class="arrow text-2xl">&#x25BC;</span>
+                        </button>
+                        <div id="details-3" class="details-content px-2 text-stone-700 border-t mt-2">
+                            <p class="font-semibold mt-4">Finding: Mostly correct, but the scope is broader.</p>
+                            <p class="mt-2">Per Section 71107, this requirement applies to the entire ACA expansion population, mirroring the scope of the work requirement.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4: Alien Eligibility -->
+                <div class="card rounded-lg shadow-sm p-6">
+                    <h3 class="text-xl font-bold text-stone-900">Stricter Alien Eligibility</h3>
+                     <div class="mt-4 accent-bg border-l-4 border-green-700 p-4 rounded-r-lg">
+                        <p class="font-semibold text-green-900">Primary Affected Group:</p>
+                        <p class="text-green-800"><span class="text-2xl mr-2">🌍</span>All lawfully present immigrants not in specified exempt categories (including adults, children, and parents).</p>
+                    </div>
+                    <div class="mt-4">
+                         <button class="btn-toggle w-full text-left font-semibold text-teal-700 hover:text-teal-900 p-2 rounded-md hover:bg-teal-50 flex justify-between items-center" data-target="details-4">
+                            <span>View Details & Refinement</span>
+                            <span class="arrow text-2xl">&#x25BC;</span>
+                        </button>
+                        <div id="details-4" class="details-content px-2 text-stone-700 border-t mt-2">
+                            <p class="font-semibold mt-4">Finding: Correct.</p>
+                            <p class="mt-2">Per Section 71109, the restriction applies to both Medicaid and CHIP, thus affecting lawfully present immigrants of all ages who do not fall into one of the specified exempt categories (like lawful permanent residents).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Program Impacts Section -->
+        <section id="program-impacts" class="mb-16">
+            <h2 class="text-3xl font-bold border-b-2 border-amber-600 pb-2 mb-8">Impacts on Programs & Funding</h2>
+            <div class="space-y-6">
+
+                <!-- Card 5: Waiver Neutrality -->
+                <div class="card rounded-lg shadow-sm p-6">
+                    <h3 class="text-xl font-bold text-stone-900">Waiver Budget Neutrality</h3>
+                    <div class="mt-4 bg-amber-50 border-l-4 border-amber-600 p-4 rounded-r-lg">
+                        <p class="font-semibold text-amber-900">Primary Affected Group:</p>
+                        <p class="text-amber-800"><span class="text-2xl mr-2">📋</span>All groups who rely on `Section 1115` demonstration waivers for innovative services or eligibility (e.g., the homeless, some individuals needing long-term care, those with complex health conditions).</p>
+                    </div>
+                    <div class="mt-4">
+                        <button class="btn-toggle w-full text-left font-semibold text-teal-700 hover:text-teal-900 p-2 rounded-md hover:bg-teal-50 flex justify-between items-center" data-target="details-5">
+                            <span>View Details & Refinement</span>
+                            <span class="arrow text-2xl">&#x25BC;</span>
+                        </button>
+                        <div id="details-5" class="details-content px-2 text-stone-700 border-t mt-2">
+                            <p class="font-semibold mt-4">Finding: The impact is much broader.</p>
+                            <p class="mt-2">Per Section 71118, this requirement applies to all `Section 1115` demonstration waivers, not just those for long-term care. While those programs could be affected, other innovative waivers (e.g., for the homeless, justice-involved individuals) would also face severe restrictions.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Narrative Advice Section -->
+        <section id="narrative-advice">
+            <h2 class="text-3xl font-bold border-b-2 border-stone-400 pb-2 mb-8">Key Takeaways & Narrative Advice</h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-lg border border-stone-200">
+                    <h4 class="font-bold text-lg accent-color">Focus on the "Expansion Population"</h4>
+                    <p class="mt-2 text-stone-600">The first three major changes—work requirements, new cost-sharing, and 6-month redeterminations—are precisely targeted at adults covered by the ACA Medicaid expansion. Framing the story around this group as the central target of the reforms will create a strong narrative focus.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg border border-stone-200">
+                    <h4 class="font-bold text-lg accent-color">Highlight the Compounding Effect</h4>
+                    <p class="mt-2 text-stone-600">These policies are not isolated. For example, the "6-Month Redeterminations" amplify the risk and administrative burden of the "Work Requirement," creating a more potent combined effect. This "policy stacking" is a key part of the story.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg border border-stone-200">
+                    <h4 class="font-bold text-lg accent-color">Frame "Budget Neutrality" as the End of Innovation</h4>
+                    <p class="mt-2 text-stone-600">The requirement for waiver budget neutrality effectively restricts the ability of local governments like D.C. to design innovative service models tailored to local needs. This can be narrated as a shift where federal control tightens, local flexibility is lost, and the most vulnerable ultimately pay the price.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-stone-200 mt-16">
+        <div class="max-w-6xl mx-auto py-4 px-4 sm:px-6 lg:px-8 text-center text-stone-600 text-sm">
+            <p>This interactive report is based on an analysis of H.R. 1 (119th Congress). For educational and informational purposes only.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Smooth scrolling for navigation links
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Toggle functionality for details sections
+            const toggleButtons = document.querySelectorAll('.btn-toggle');
+            toggleButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const targetId = this.dataset.target;
+                    const targetContent = document.getElementById(targetId);
+                    
+                    if (targetContent) {
+                        this.classList.toggle('open');
+                        targetContent.classList.toggle('show');
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
